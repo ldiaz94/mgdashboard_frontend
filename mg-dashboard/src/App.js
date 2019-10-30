@@ -1,9 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import LoansTable from './components/LoansTable';
 import Greeting from './components/Greeting';
 import Graph from './components/Graph';
+import About from './components/pages/About';
 
 export class App extends Component {
 
@@ -17,17 +19,20 @@ export class App extends Component {
       {
         id: 1,
         title: "Home",
-        type: "normal"
+        type: "normal",
+        url: "/"
       },
       {
         id: 2,
         title: "About",
-        type: "normal"
+        type: "normal",
+        url: "/about"
       },
       {
         id: 3,
         title: "Login",
-        type: "login"
+        type: "login",
+        url: "#"
       }
     ],
 
@@ -55,12 +60,21 @@ export class App extends Component {
 
   render() {
     return (
-      <div>
-        <Navbar pages={ this.state.pages } />
-        <Greeting user= { this.state.user }/>
-        <LoansTable loans= { this.state.loans }/>
-        <Graph />
-      </div>
+      <Router>
+        <React.Fragment>
+          <Navbar pages={ this.state.pages } />
+
+          <Route exact path="/" render={props => (
+            <React.Fragment>
+              <Greeting user= { this.state.user }/>
+              <LoansTable loans= { this.state.loans }/>
+              <Graph />
+            </React.Fragment>
+          )}/>
+
+          <Route path="/about" component={About}/>
+        </React.Fragment>
+      </Router>
     )
   }
 }

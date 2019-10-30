@@ -1,14 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export class Navlink extends Component {
     render() {
         
             if (this.props.page.type === "login"){
                 return (
-                    <a href="#" style= { loginStyle }> { this.props.page.title }</a>)
+                    <Link to={ this.props.page.url } style= { loginStyle }> { this.props.page.title }</Link>)
             } else if (this.props.page.type === "normal") {
                 return (
-                    <a href="#" style= { linkStyle }> { this.props.page.title }</a>)
+                    <Link to= { this.props.page.url } style= { linkStyle }> { this.props.page.title }</Link>)
             }
     }
 }
