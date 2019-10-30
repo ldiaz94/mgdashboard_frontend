@@ -6,7 +6,7 @@ export class Navlink extends Component {
         
             if (this.props.page.type === "login"){
                 return (
-                    <Link to={ this.props.page.url } style= { loginStyle }> { this.props.page.title }</Link>)
+                    <a href="http://localhost:8000/admin" style= { loginStyle }> { this.props.page.title }</a>)
             } else if (this.props.page.type === "normal") {
                 return (
                     <Link to= { this.props.page.url } style= { linkStyle }> { this.props.page.title }</Link>)

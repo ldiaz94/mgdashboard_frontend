@@ -25,3 +25,7 @@ table {
 .jumbotron {
   background: #bbb;
 }
+
+p {
+  padding: 10px;
+}

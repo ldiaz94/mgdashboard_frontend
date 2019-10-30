@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
+import axios from "axios";
 import './App.css';
 import Navbar from './components/Navbar';
 import LoansTable from './components/LoansTable';
@@ -15,48 +16,25 @@ export class App extends Component {
         name: "Luis"
     },
 
-    pages: [
-      {
-        id: 1,
-        title: "Home",
-        type: "normal",
-        url: "/"
-      },
-      {
-        id: 2,
-        title: "About",
-        type: "normal",
-        url: "/about"
-      },
-      {
-        id: 3,
-        title: "Login",
-        type: "login",
-        url: "#"
-      }
-    ],
+    pages: [    ],
 
-    loans: [
-      {
-        id: 1,
-        name: "Mortgage",
-        loan: 150000,
-        deposit: 30000,
-        ltv: 83.3,
-        term: 25,
-        outstanding: 30000
-      },
-      {
-        id: 2,
-        name: "Car",
-        loan: 13000,
-        deposit: 5000,
-        ltv: NaN,
-        term: 3.5,
-        outstanding: 10000
-      }
-    ]
+    loans: [    ]
   }
+
+  componentDidMount() {
+    this.refreshList();
+  }
+
+  refreshList = () => {
+        axios
+          .get("/api/pages/")
+          .then(res => this.setState({ pages: res.data }))
+          .catch(err => console.log(err));
+        axios
+          .get("/api/loans/")
+          .then(res => this.setState({ loans: res.data }))
+          .catch(err => console.log(err));
+        };
 
   render() {
     return (
